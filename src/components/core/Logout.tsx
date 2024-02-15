@@ -14,7 +14,9 @@ import { useNavigate } from "react-router-dom";
 const Logout = ({ mobile, subnav }: { mobile?: boolean; subnav?: boolean }) => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    navigate("login");
+    localStorage.setItem("data", null);
+
+    window.location.reload();
   };
   return (
     <AlertDialog>

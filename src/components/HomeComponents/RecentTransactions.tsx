@@ -10,14 +10,14 @@ import Tab from "./TableRow";
 
 const RecentTransactions = () => {
   return (
-    <section className="border border-opacity-20  rounded-t-xl  bg-white  ">
+    <section className="border border-gray-100  rounded-t-xl  bg-white w-full ">
       <div className=" w-full  h-10 flex items-center pl-4  py-6">
         <p className="font-medium text-xl">Latest Transaction</p>
       </div>
       <ScrollArea className=" p-4">
         <Table className="borde border-opacity-30  rounded-lg min-w-[800px] overflow-x-scroll">
           <TableHeader className="rounded-lg ">
-            <TableRow className="">
+            <TableRow className="border-gray-100">
               <TableHead className="font-bold text-lg text-black text-opacity-100 text-center dark:text-white">
                 Loan ID
               </TableHead>

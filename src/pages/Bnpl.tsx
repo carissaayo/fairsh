@@ -9,6 +9,8 @@ import ShowToaster from "../components/core/ShowToaster";
 import { useBnplStore } from "../context/Bnpl/getBnpl";
 import Navs from "../components/BnplComponents/Navs";
 import BnplTable from "../components/BnplComponents/BnplTable";
+import PaginationCon from "../components/Pagination";
+import Search from "../components/BnplComponents/Search";
 
 const Bnpl = () => {
   const queryClient = useQueryClient();
@@ -22,12 +24,15 @@ const Bnpl = () => {
   const filtered = useBnplStore((state) => state.filtered);
 
   const setBnpls = useBnplStore((state) => state.setBnpls);
+  const setPaginatedBnpls = useBnplStore((state) => state.setPaginatedBnpl);
   const bnpls = useBnplStore((state) => state.bnpls);
   const bnplsAnalytics = useBnplStore((state) => state.bnplsAnalytics);
   const setBnplsAnalytics = useBnplStore((state) => state.setBnplsAnalytics);
   const filterTerm = useBnplStore((state) => state.filterTerm);
   const refetch = useBnplStore((state) => state.refetch);
   const setRefetch = useBnplStore((state) => state.setRefetch);
+  const pageCount = useBnplStore((state) => state.pageCount);
+  const setPageCount = useBnplStore((state) => state.setPageCount);
 
   // Refetch
   const refetchBnpls = useCallback(async () => {
@@ -134,7 +139,7 @@ const Bnpl = () => {
   }, [filterTerm, filtered]);
 
   return (
-    <main className="w-full h-full   overflow-x-hidden overflow-y-scroll mb-[400px] md:mb-40 bg-white ">
+    <main className="w-full h-full   overflow-x-hidden overflow-y-scroll mb-52 xxl:mb-40 bg-white ">
       {loading ? (
         <div className="w-full flex items-center justify-center flex-1 h-full ">
           <ColorRing
@@ -151,8 +156,20 @@ const Bnpl = () => {
         <>
           <Navs />
           <section className="w-full mb-32 px-4 xs:px-8">
+            <Search />
+
             {/* <MainCon /> */}
             <BnplTable />
+            <section className="">
+              {" "}
+              <PaginationCon
+                itemsPerPage={10}
+                items={bnpls}
+                setItems={setPaginatedBnpls}
+                pageCount={pageCount}
+                setPageCount={setPageCount}
+              />
+            </section>
           </section>
           <ShowToaster />
         </>

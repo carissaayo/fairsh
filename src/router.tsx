@@ -16,6 +16,7 @@ import GuestLayout from "./components/core/GuestLayout";
 
 import Bnpl from "./pages/Bnpl";
 import BnplPayment from "./pages/BnplPayment";
+import ManageAccount from "./pages/ManageAccount";
 
 const router = createBrowserRouter([
   {
@@ -31,10 +32,14 @@ const router = createBrowserRouter([
         path: "/loans",
         element: <Bnpl />,
       },
-      // {
-      //   path: "/payments",
-      //   element: <BnplPayment />,
-      // },
+      {
+        path: "/payments",
+        element: <BnplPayment />,
+      },
+      {
+        path: "/account",
+        element: <ManageAccount />,
+      },
 
       {
         path: "/change-password",

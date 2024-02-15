@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -23,7 +22,6 @@ import { useLoginStore } from "../context/auth/loginStore";
 import axiosClient from "../lib/axiosClient";
 
 const LoginFormLayout = () => {
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   // LoginStore
@@ -67,7 +65,6 @@ const LoginFormLayout = () => {
         localStorage.setItem("data", JSON.stringify(response.data?.data));
         setLoading(false);
         setSuccess(true);
-        // navigate("/");
       })
       .catch((error) => {
         console.log(error);

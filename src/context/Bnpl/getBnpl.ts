@@ -14,6 +14,14 @@ type Data = {
   actionLoading: boolean;
   done: boolean;
   refetch: boolean;
+  paginatedBnpls: Bnpl[];
+  pageNumber: number;
+  totalPageNumber: number;
+  pageCount: number;
+  setPageCount: (page: number) => void;
+  setTotalPageNumber: (num: number) => void;
+  setPageNumber: (num: number) => void;
+  setPaginatedBnpl: (bnpl: Bnpl[]) => void;
   setRefetch: (boo: boolean) => void;
   setDone: (done: boolean) => void;
   setActionLoading: (ac: boolean) => void;
@@ -30,7 +38,6 @@ export const useBnplStore = create<Data>((set) => ({
   error: false,
   filteredBnplLoading: false,
   actionLoading: false,
-  setActionLoading: (ac: boolean) => set(() => ({ actionLoading: ac })),
   bnpls: [],
   filterTerm: "",
   bnplsAnalytics: [],
@@ -38,6 +45,15 @@ export const useBnplStore = create<Data>((set) => ({
   rejectReason: "",
   done: false,
   refetch: false,
+  paginatedBnpls: [],
+  totalPageNumber: 1,
+  pageNumber: 1,
+  pageCount: 1,
+  setActionLoading: (ac: boolean) => set(() => ({ actionLoading: ac })),
+  setPageCount: (pages: number) => set({ pageCount: pages }),
+  setTotalPageNumber: (num: number) => set({ totalPageNumber: num }),
+  setPageNumber: (num: number) => set({ pageNumber: num }),
+  setPaginatedBnpl: (bnpl: Bnpl[]) => set(() => ({ paginatedBnpls: bnpl })),
   setRefetch: (fet: boolean) => set(() => ({ refetch: fet })),
   setDone: (done: boolean) => set(() => ({ done })),
   setRejectReason: (text: string) => set(() => ({ rejectReason: text })),

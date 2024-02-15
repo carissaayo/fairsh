@@ -5,6 +5,7 @@ import "react-responsive-pagination/themes/classic.css";
 import ReactPaginate from "react-paginate";
 
 import {
+  Bnpl,
   Retailer,
   RetailerCustomer,
   RetailerGadget,
@@ -19,7 +20,7 @@ const PaginationCon = ({
   setPageCount,
 }: {
   itemsPerPage: number;
-  items: Retailer[] | RetailerCustomer[] | RetailerGadget[] | RetailerSale[];
+  items: Bnpl[];
   setItems: (items) => void;
   pageCount: number;
   setPageCount: (page: number) => void;

@@ -4,7 +4,7 @@ import { Bnpl } from "../../lib/types";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import LoanDetails from "./LoanDetails";
 import CustomerDetails from "./CustomerDetails";
-import { ScrollArea } from "../ui/scroll-area";
+import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import GuarantorList from "./GuarantorList";
 import ConfirmLoan from "./ConfirmLoan";
 import RejectLoan from "./RejectLoan";
@@ -19,7 +19,7 @@ const BnplRow = ({ bnpl, index }: { bnpl: Bnpl; index: number }) => {
     <>
       <TableRow
         key={bnpl?._id}
-        className="cursor-pointer"
+        className="cursor-pointer border-gray-100"
         onClick={() => setOpenBnpl(true)}
       >
         <TableCell className="text-center">{index + 1}</TableCell>
@@ -48,10 +48,20 @@ const BnplRow = ({ bnpl, index }: { bnpl: Bnpl; index: number }) => {
         </TableCell>
       </TableRow>
       <Dialog open={openBnpl} onOpenChange={() => setOpenBnpl(!openBnpl)}>
-        <DialogContent className="sm:max-w-[80%] h-[90%] flex flex-col gap-8">
+        <DialogContent className="sm:max-w-[90%] h-[90%] flex flex-col gap-8">
           <DialogHeader className="mb-0 ">
             <DialogTitle className="flex items-center justify-between w-[90%]">
               <p className="text-2xl">Bnpl Details</p>
+              <p
+                className={`w-[max-content] p-2  flex items-center justify-center  rounded-xl text-white
+                ${bnpl.loanStatus === "Approved" && "bg-green-600"}
+                ${bnpl.loanStatus === "Rejected" && "bg-red-600"}
+                ${bnpl.loanStatus === "Awaiting Approval" && "bg-yellow-600"}
+                ${bnpl.loanStatus === "Awaiting Enrollment" && "bg-blue-600"}
+                `}
+              >
+                {bnpl.loanStatus}
+              </p>
               {bnpl.loanStatus !== "Completed" && (
                 <div className="flex items-center gap-4">
                   <ConfirmLoan id={bnpl._id} />
@@ -64,11 +74,12 @@ const BnplRow = ({ bnpl, index }: { bnpl: Bnpl; index: number }) => {
             </DialogTitle>
           </DialogHeader>
           <ScrollArea className=" rounded-md border p-4 ">
-            <div className="flex items-start gap-4  w-full h-full mb-8">
+            <div className="flex items-start gap-4  w-full h-full mb-8 min-w-[1170px]">
               <CustomerDetails bnpl={bnpl} />
               <LoanDetails bnpl={bnpl} />
               <GuarantorList />
             </div>
+            <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </DialogContent>
       </Dialog>

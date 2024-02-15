@@ -26,7 +26,7 @@ const TopNav = ({
 }) => {
   return (
     <main
-      className={`w-full h-20 border-b  border-black border-opacity-5 flex items-center px-12 justify-between overflow-hidden bg-[#EFF6E0] bg-opacity-20 dark:border-[#F87E0D] dark:border-opacity-40  dark:bg-black`}
+      className={`w-full h-20 border-b  border-black border-opacity-5 flex lg:hidden items-center px-4 justify-between overflow-hidden bg-[#EFF6E0] bg-opacity-20 dark:border-[#F87E0D] dark:border-opacity-40  dark:bg-black`}
     >
       <div className="">
         <Link to="/">

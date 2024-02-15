@@ -1,13 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import {
-  BellIcon,
-  PencilSquareIcon,
-  WrenchScrewdriverIcon,
-} from "@heroicons/react/24/outline";
+import { BellIcon } from "@heroicons/react/24/outline";
 
 import Logout from "./Logout";
 import userAvatar from "../../assets/images/user-avatar.jpg";
-import { ModeToggle } from "../ModeToggler";
 import { useTheme } from "../ThemeProvider";
 import { useLoginStore } from "../../context/auth/loginStore";
 
@@ -20,19 +15,10 @@ const MobileNav = ({
 }) => {
   const user = useLoginStore((state) => state.user);
 
-  const { setTheme, theme } = useTheme();
-
   const navigate = useNavigate();
-  const goTo = (url: string) => {
+  const goTo = (url: string = "") => {
     setOpenNav(false);
-    navigate(url);
-  };
-  const ChangeTheme = () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
+    url && navigate(url);
   };
 
   return (
@@ -47,29 +33,16 @@ const MobileNav = ({
         </div>
         <p className="text-lg">{user && user.profile.fullName}</p>
       </div>
-      <div className="flex items-center gap-6 w-full hover:cursor-pointer border-b border-opacity-20  h-[30px]  pb-8 pl-6">
-        <WrenchScrewdriverIcon className="w-8 h-8" />
-        <span className="text-lg">Manage Account </span>
-      </div>
-      <div
-        className="flex items-center gap-6 w-full hover:cursor-pointer border-b border-opacity-20  h-[30px]  pb-8 pl-6"
-        onClick={ChangeTheme}
-      >
-        <ModeToggle />
-        <span className="text-lg">Change Theme </span>
-      </div>
+
       {/* <hr className="" /> */}
-      <div className="flex items-center gap-6 w-full hover:cursor-pointer border-b border-opacity-20 h-[30px] pb-8 pl-6">
+      <div
+        className="flex items-center gap-6 w-full hover:cursor-pointer border-b border-opacity-20 h-[30px] pb-8 pl-6"
+        onClick={() => goTo()}
+      >
         <BellIcon className="w-8 h-8" />
         <span className="text-lg">Notifications </span>
       </div>
-      <div
-        className="flex items-center gap-6  w-full hover:cursor-pointer border-b border-opacity-20  h-[30px]  pb-8 pl-6"
-        onClick={() => goTo("/change-password")}
-      >
-        <PencilSquareIcon className="w-8 h-8" />
-        <span className="text-lg">Change Password </span>
-      </div>
+
       <Logout mobile />
     </section>
   );

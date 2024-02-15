@@ -1,8 +1,8 @@
 import {
   BuildingStorefrontIcon,
-  UserGroupIcon,
-  DevicePhoneMobileIcon,
-  UserIcon,
+  CurrencyDollarIcon,
+  BanknotesIcon,
+  Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
 import MobileNavItem from "./MobileNavItem";
 
@@ -13,10 +13,9 @@ const BottomNav = ({ open }: { open: () => void }) => {
       onClick={open}
     >
       <MobileNavItem Icon={BuildingStorefrontIcon} title="/" />
-      <MobileNavItem Icon={UserGroupIcon} title="retailers" />
-      <MobileNavItem Icon={DevicePhoneMobileIcon} title="payments" />
-
-      <MobileNavItem Icon={UserIcon} title="users" />
+      <MobileNavItem Icon={CurrencyDollarIcon} title="Loans" />
+      <MobileNavItem Icon={BanknotesIcon} title="Payments" />
+      <MobileNavItem Icon={Cog6ToothIcon} title="account" />
     </div>
   );
 };

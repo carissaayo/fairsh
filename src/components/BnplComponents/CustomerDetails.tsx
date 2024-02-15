@@ -71,16 +71,6 @@ const CustomerDetails = ({ bnpl }: { bnpl: Bnpl }) => {
         <p className="w-28">Marital Status</p>
         <p className="">Single</p>
       </div>
-      <p
-        className={`w-[max-content] p-2  flex items-center justify-center  rounded-xl text-white
-        ${bnpl.loanStatus === "Approved" && "bg-green-600"}
-        ${bnpl.loanStatus === "Rejected" && "bg-red-600"}
-        ${bnpl.loanStatus === "Awaiting Approval" && "bg-yellow-600"}
-        ${bnpl.loanStatus === "Awaiting Enrollment" && "bg-blue-600"}
-        `}
-      >
-        {bnpl.loanStatus}
-      </p>
     </section>
   );
 };

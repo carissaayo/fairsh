@@ -29,6 +29,7 @@ const DefaultLayout = () => {
 
         <section className="lg:flex h-screen  relative  " onClick={open}>
           <SideNav />
+          <TopNav openNav={openNav} setOpenNav={setOpenNav} />
           {/* <ScrollArea> */}
           <Outlet />
           {/* <ScrollBar orientation="vertical" /> */}

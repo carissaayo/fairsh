@@ -6,108 +6,67 @@ import {
   DropdownMenuTrigger,
   DropdownMenuRadioGroup,
 } from "../ui/dropdown-menu";
+import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 const Navs = () => {
-  const [position, setPosition] = useState("bottom");
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("Pending");
 
   return (
-    <section className="w-full flex items-center h-10 gap-6 mb-10 pl-20 border-b border-opacity-10 py-8">
-      {/* Pending Menu */}
-      <div className="">
-        <DropdownMenu onOpenChange={() => setActive("Pending")}>
-          <DropdownMenuTrigger
-            asChild
-            //   onClick={() => setActive("Pending")}
-          >
+    <main className=" h-[140px] sm:h-[135px]">
+      <ScrollArea>
+        <section className="w-full flex items-center gap-2 sm:gap-6 mb-4 pl-4 sm:pl-20  border-opacity-10 relative">
+          {/* Pending Menu */}
+          <div className="flex items-center gap-4">
             <div
-              className={` h-8 pb-4 cursor-pointer  ${
+              className={`p-4 cursor-pointer  ${
                 active === "Pending" && "border-b-2 border-[#F87E0D] font-bold "
               }`}
+              onClick={() => setActive("Pending")}
             >
-              <p className="text-lg ">Pending</p>
+              <p className="sm:text-lg ">Pending (20)</p>
             </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-full h-20 px-8  flex items-center">
-            {/* <DropdownMenuLabel>Panel Position</DropdownMenuLabel> */}
-            {/* <DropdownMenuSeparator /> */}
-            <DropdownMenuRadioGroup
-              value={position}
-              onValueChange={setPosition}
-              className="flex gap-3 items-center w-full text-lg font-normal"
-            >
-              <DropdownMenuItem
-                // value="Awaiting Approval"
-                className=" cursor-pointer"
-              >
-                Awaiting Approval(2)
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                // value="Awaiting Enrollment "
-                className=" cursor-pointer"
-              >
-                Awaiting Enrollment(2)
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                // value="Rejected"
-                className=" cursor-pointer"
-              >
-                Rejected(2)
-              </DropdownMenuItem>
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-
-      <div className="">
-        <DropdownMenu onOpenChange={() => setActive("Ongoing")}>
-          <DropdownMenuTrigger asChild>
             <div
-              className={` h-8 pb-4 cursor-pointer ${
-                active === "Ongoing" && "border-b-2 border-[#F87E0D] font-bold"
+              className={`p-4 cursor-pointer  ${
+                active === "Ongoing" &&
+                "border-b-2  border-[#F87E0D] font-bold "
               }`}
+              onClick={() => setActive("Ongoing")}
             >
-              <p className="text-lg">Ongoing</p>
+              <p className="sm:text-lg ">Ongoing (20)</p>
             </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-full h-20 px-8  flex items-center">
-            {/* <DropdownMenuLabel>Panel Position</DropdownMenuLabel> */}
-            {/* <DropdownMenuSeparator /> */}
-            <DropdownMenuRadioGroup
-              value={position}
-              onValueChange={setPosition}
-              className="flex gap-3 items-center w-full text-lg font-normal"
+
+            <div
+              className={`p-4 cursor-pointer  ${
+                active === "Completed" &&
+                "border-b-2 border-[#F87E0D] font-bold "
+              }`}
+              onClick={() => setActive("Completed")}
             >
-              <DropdownMenuItem
-                // value="Awaiting Approval"
-                className=" cursor-pointer"
-              >
-                All(20)
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                // value="Awaiting Enrollment "
-                className=" cursor-pointer"
-              >
-                Payment Due(12)
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                // value="Rejected"
-                className=" cursor-pointer"
-              >
-                Rejected(2)
-              </DropdownMenuItem>
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-      <div
-        onClick={() => setActive("Completed")}
-        className={` h-8 pb-4 cursor-pointer ${
-          active === "Completed" && "border-b-2 border-[#F87E0D] font-bold"
-        }`}
-      >
-        <p className="text-lg">Completed</p>
-      </div>
-    </section>
+              <p className="sm:text-lg ">Completed (20)</p>
+            </div>
+          </div>
+        </section>
+        <section className="min-w-[505px] w-full px-4 sm:px-20">
+          <div
+            className={` w-full gap-8 ${
+              active === "Pending" ? "flex" : "hidden"
+            }`}
+          >
+            <p className="py-4  cursor-pointer"> Awaiting Approval (2)</p>
+            <p className="py-4 cursor-pointer"> Awaiting Enrollment (2)</p>
+            <p className="py-4 cursor-pointer"> Rejected (2)</p>
+          </div>
+          <div
+            className={` w-full gap-8  ${
+              active === "Ongoing" ? "flex" : "hidden"
+            }`}
+          >
+            <p className="py-4  cursor-pointer"> All (2)</p>
+            <p className="py-4 cursor-pointer"> Payment Due (2)</p>
+          </div>
+        </section>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
+    </main>
   );
 };
 

@@ -1,5 +1,11 @@
 import { PureComponent } from "react";
-import { PieChart, Pie, Sector, ResponsiveContainer, Legend } from "recharts";
+// import { PieChart, Pie, Sector, ResponsiveContainer, Legend } from "recharts";
+import { PieChart } from "@mui/x-charts/PieChart";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
 const data = [
   { name: "Completed", value: 400 },
   { name: "Pending", value: 300 },
@@ -79,41 +85,40 @@ const renderActiveShape = (props) => {
   );
 };
 
-export default class BnplSummaryChart extends PureComponent {
-  state = {
-    activeIndex: 0,
-  };
+// export default class BnplSummaryChart extends PureComponent {
+//   state = {
+//     activeIndex: 0,
+//   };
 
-  onPieEnter = (_, index) => {
-    this.setState({
-      activeIndex: index,
-    });
-  };
+//   onPieEnter = (_, index) => {
+//     this.setState({
+//       activeIndex: index,
+//     });
+//   };
 
-  render() {
-    return (
-      //   <ResponsiveContainer width="50%" height="40%">
-      //   <div className=" ">
-      <PieChart width={400} height={300}>
-        <Pie
-          activeIndex={this.state.activeIndex}
-          activeShape={renderActiveShape}
-          data={data}
-          cx="50%"
-          cy="50%"
-          innerRadius={60}
-          outerRadius={80}
-          fill="#F87E0D"
-          dataKey="value"
-          onMouseEnter={this.onPieEnter}
-        />
-        {/* <Legend /> */}
-      </PieChart>
-      //   </div>
-      //   </ResponsiveContainer>
-    );
-  }
-}
+//   render() {
+//     return (
+//       //   <ResponsiveContainer width="50%" height="40%">
+//       //   <div className=" ">
+//       <PieChart width={400} height={300}>
+//         <Pie
+//           activeIndex={this.state.activeIndex}
+//           activeShape={renderActiveShape}
+//           data={data}
+//           cx="50%"
+//           cy="50%"
+//           innerRadius={60}
+//           outerRadius={80}
+//           fill="#F87E0D"
+//           dataKey="value"
+//           onMouseEnter={this.onPieEnter}
+//         />
+//       </PieChart>
+//       //   </div>
+//       //   </ResponsiveContainer>
+//     );
+//   }
+// }
 
 // import { Chart } from "react-google-charts";
 
@@ -130,7 +135,7 @@ export default class BnplSummaryChart extends PureComponent {
 
 // const BnplSummaryChart = () => {
 //   return (
-//     <div className="w-[50%] xxl:w-full flex items-center justify-center">
+//     <div className="w-[%] xxl:w-full flex items-center justify-center">
 //       <Chart
 //         chartType="PieChart"
 //         data={data}
@@ -143,3 +148,25 @@ export default class BnplSummaryChart extends PureComponent {
 // };
 
 // export default BnplSummaryChart;
+
+import React from "react";
+
+const BnplSummaryChart = () => {
+  return (
+    <PieChart
+      series={[
+        {
+          data: [
+            { id: 0, value: 10, label: "series A" },
+            { id: 1, value: 15, label: "series B" },
+            { id: 2, value: 20, label: "series C" },
+          ],
+        },
+      ]}
+      width={400}
+      height={200}
+    />
+  );
+};
+
+export default BnplSummaryChart;

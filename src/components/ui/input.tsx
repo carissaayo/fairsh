@@ -1,14 +1,15 @@
 import * as React from "react";
 
 import { cn } from "../../lib";
-// import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/outline";
+
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     // I added this useState
-    // const [showPassword, setShowPassword] = React.useState(false);
+    const [showPassword, setShowPassword] = React.useState(false);
 
     return (
       <div className="flex relative">
@@ -21,25 +22,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           {...props}
         />
-        {/* Added code starts */}
-        {/* {pass && (
-          <span className="absolute right-3 top-2 hover:cursor-pointer">
-            {showPassword ? (
-              <EyeSlashIcon
-                className="h-6 w-6"
-                aria-hidden="true"
-                onClick={() => setShowPassword(false)}
-              />
-            ) : (
-              <EyeIcon
-                className="h-6 w-6"
-                aria-hidden="true"
-                onClick={() => setShowPassword(true)}
-              />
-            )}
-          </span>
-        )} */}
-        {/* Added code stops */}
       </div>
     );
   }

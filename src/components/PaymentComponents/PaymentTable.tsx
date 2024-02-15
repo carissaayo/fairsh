@@ -7,8 +7,10 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import BnplRow from "./BnplRow";
-const BnplTable = () => {
+
+import PaymentRow from "./PaymentRow";
+
+const PaymentTable = () => {
   const bnpls = useBnplStore((state) => state.bnpls);
 
   return (
@@ -30,7 +32,7 @@ const BnplTable = () => {
                 Gadget
               </TableHead>
               <TableHead className="font-bold text-lg text-opacity-100  text-center ">
-                Status
+                Channel
               </TableHead>
               <TableHead className="font-bold text-lg text-opacity-100  text-center ">
                 Date
@@ -40,7 +42,7 @@ const BnplTable = () => {
           <TableBody className=".bg">
             {bnpls.length > 0 &&
               bnpls.map((bnpl, index) => (
-                <BnplRow key={bnpl._id} bnpl={bnpl} index={index} />
+                <PaymentRow key={bnpl._id} bnpl={bnpl} index={index} />
               ))}
           </TableBody>
         </Table>
@@ -50,4 +52,4 @@ const BnplTable = () => {
   );
 };
 
-export default BnplTable;
+export default PaymentTable;

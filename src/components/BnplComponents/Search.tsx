@@ -12,7 +12,7 @@ import {
 
 const Search = () => {
   return (
-    <section className=" h-[140px] sm:h-[70px] border border-opacity-35 flex justify-center flex-col px-8 rounded-lg  mb-10 ">
+    <section className=" h-[140px] sm:h-[70px] border border-gray-100 flex justify-center flex-col px-8 rounded-lg  mb-10 ">
       <div className="flex  gap-6 sm:gap-12 lg:gap-4 justify-center sm:justify-start flex-col  sm:flex-row">
         <div className=" flex gap-2 justify-start  items-center w-full">
           <AdjustmentsHorizontalIcon className="h-6 w-6" />
