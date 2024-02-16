@@ -22,6 +22,7 @@ import toast from "react-hot-toast";
 
 import BnplSummaryChart from "../components/HomeComponents/BnplSummaryChart";
 import LoanIssuedChart from "../components/HomeComponents/LoanIssuedChart";
+import { ScrollArea, ScrollBar } from "../components/ui/scroll-area";
 
 const Home = () => {
   // const queryClient = useQueryClient();
@@ -117,18 +118,18 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="flex items-center flex-col xxl:flex-row mb-20  gap-8 px-12 md:px-4w-full">
+      <section className="flex items-center flex-col xxl:flex-row mb-20  gap-8 px-12 md:px-4 w-full">
         <div className="bg-white rounded-lg pt-4 h-[400px]  mb-10 xxl:mb-0">
           <h1 className="ml-6 mb-2">Loan Issued</h1>
           <LoanIssuedChart />
         </div>
         <div className="bg-white rounded-lg pt-4 h-[400px]">
-          <h1 className="ml-6 ">Bnpl Summary</h1>
+          <h1 className="ml-6 mb-10 ">Bnpl Summary</h1>
           <BnplSummaryChart />
         </div>
       </section>
 
-      <section className="flex flex-col xxl:flex-row items-center gap-8 mb-48 lg:mb-14 w-full">
+      <section className="flex flex-col xxl:flex-row items-center gap-8 mb-48 lg:mb-14 w-full ">
         <RecentTransactions />
         <TopRetailers />
       </section>

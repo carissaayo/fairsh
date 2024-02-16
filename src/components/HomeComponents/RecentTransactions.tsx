@@ -10,7 +10,7 @@ import Tab from "./TableRow";
 
 const RecentTransactions = () => {
   return (
-    <section className="border border-gray-100  rounded-t-xl  bg-white w-full ">
+    <section className="border border-gray-100  rounded-t-xl  bg-white w-[90%] xl:w-full ">
       <div className=" w-full  h-10 flex items-center pl-4  py-6">
         <p className="font-medium text-xl">Latest Transaction</p>
       </div>

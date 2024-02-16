@@ -3,7 +3,7 @@ import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 
 const TopRetailers = () => {
   return (
-    <section className="border border-gray-100  rounded-t-xl w-full sm:w-[80%] lg:w-[60%] xxl:flex-1 bg-white">
+    <section className="border border-gray-100  rounded-t-xl w-[90%] lg:w-[90%] xxl:flex-1 bg-white">
       <div className=" w-full border-b border-gray-100 h-10 flex items-center pl-4 py-6 ">
         <p className="font-medium text-xl ">Top Loans</p>
       </div>
