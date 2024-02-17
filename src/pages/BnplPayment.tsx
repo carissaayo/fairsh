@@ -1,14 +1,16 @@
-import { useCallback, useEffect } from "react";
-import toast from "react-hot-toast";
 import { Bars, ColorRing } from "react-loader-spinner";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import PaymentTable from "../components/PaymentComponents/PaymentTable";
 import ShowToaster from "../components/core/ShowToaster";
 
 import { useBnplStore } from "../context/Bnpl/getBnpl";
-import axiosClient from "../lib/axiosClient";
+
 import PaginationCon from "../components/Pagination";
-import Search from "../components/BnplComponents/Search";
+
+import SummaryTable from "../components/BnplComponents/SummaryTable";
+import { useUserProfileStore } from "../context/auth/getProfile";
+import { Navigate } from "react-router-dom";
+import { useLoginStore } from "../context/auth/loginStore";
 
 const Bnpl = () => {
   const queryClient = useQueryClient();
@@ -19,21 +21,10 @@ const Bnpl = () => {
 
   const pageCount = useBnplStore((state) => state.pageCount);
   const setPageCount = useBnplStore((state) => state.setPageCount);
+  const profile = useLoginStore((state) => state.user.profile);
 
-  if (loading) {
-    return (
-      <div className="w-full flex items-center justify-center flex-1 h-full ">
-        <Bars
-          height="100"
-          width="100"
-          color="#4fa94d"
-          ariaLabel="bars-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />
-      </div>
-    );
+  if (!profile.emailVerified) {
+    return <Navigate to="/account" />;
   }
 
   return (
@@ -53,9 +44,11 @@ const Bnpl = () => {
       ) : (
         <>
           <section className="w-full mb-32 px-4 xs:px-8">
-            <Search />
             {/* <MainCon /> */}
-            <PaymentTable />
+            <section className="flex flex-col xxl:flex-row gap-8">
+              <SummaryTable />
+              <PaymentTable />
+            </section>
 
             <section className="">
               {" "}

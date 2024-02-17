@@ -1,3 +1,12 @@
+export type Profile = {
+  adminId: string;
+  email: string;
+  fullName: string;
+  isApproved: boolean;
+  permissions: string[];
+  fintechPartner: boolean;
+  emailVerified: boolean;
+};
 export type LoggedInUserData = {
   accessToken: string;
   profile: {
@@ -6,6 +15,8 @@ export type LoggedInUserData = {
     fullName: string;
     isApproved: boolean;
     permissions: string[];
+    fintechPartner: boolean;
+    emailVerified: boolean;
   };
   refreshToken: string;
 };

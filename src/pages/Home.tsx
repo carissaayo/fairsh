@@ -22,30 +22,18 @@ import toast from "react-hot-toast";
 
 import BnplSummaryChart from "../components/HomeComponents/BnplSummaryChart";
 import LoanIssuedChart from "../components/HomeComponents/LoanIssuedChart";
-import { ScrollArea, ScrollBar } from "../components/ui/scroll-area";
+
+import { Navigate } from "react-router-dom";
+import { useUserProfileStore } from "../context/auth/getProfile";
 
 const Home = () => {
-  // const queryClient = useQueryClient();
-  // const userName = useLoginStore((state) => state.user.profile.fullName);
-  // const loading = useMainStore((state) => state.loading);
+  const profile = useLoginStore((state) => state.user.profile);
 
-  // if (loading) {
-  //   return (
-  //     <div className="w-full flex items-center justify-center flex-1 h-full ">
-  //       <Bars
-  //         height="100"
-  //         width="100"
-  //         color="#4fa94d"
-  //         ariaLabel="bars-loading"
-  //         wrapperStyle={{}}
-  //         wrapperClass=""
-  //         visible={true}
-  //       />
-  //     </div>
-  //   );
-  // }
+  if (!profile.emailVerified) {
+    return <Navigate to="/account" />;
+  }
   return (
-    <main className="w-full h-full pt-8 px-4 xs:px-4 overflow-x-hidden overflow-y-scroll mb-[400px] md:mb-40  bg-white bg-opacity-90">
+    <main className="w-full h-full pt-2 px-4 xs:px-4 overflow-x-hidden overflow-y-scroll mb-[400px] md:mb-40  bg-white bg-opacity-90">
       <div className=" mb-1 pb-0">
         {/* Input con */}
         {/* <div className="lg:hidden flex items-center justify-end mb-8 w-full">
@@ -63,11 +51,11 @@ const Home = () => {
       </div>
 
       {/* Stats con */}
-      <section className="flex  justify-between items-center   xl:gap-6 py-8 xxl:h-52  px-12 sm:px-8 xxl:px-4  border border-gray-100 mx-auto xxl:mx-0 rounded-lg mb-10 flex-row flex-wrap xxl:flex-nowrap xl:w-[80%] xxl:w-full ">
+      <section className="flex  justify-between items-center   xl:gap-6 py-4 xxl:h-52  px-12 sm:px-8 xxl:px-4   border-gray-100 mx-auto xxl:mx-0 rounded-lg  flex-row flex-wrap xxl:flex-nowrap xl:w-[80%] xxl:w-full ">
         {/* Stats 1 */}
-        <div className=" flex    border border-gray-100  w-full sm:w-[48%] md:w-[48%] h-40  justify-center xxl:flex-1  rounded-xl gap-6 sm:gap-4 px-4  font-bold items-center bg-white text-black hover:text-white hover:bg-[#F87E0D] mb-6 xxl:mb-0 ">
-          <div className="bg-gray-200 h-[80px] sm:h-[60px] w-[80px] flex items-center justify-center rounded-lg sm:flex-1">
-            <BanknotesIcon className=" w-12 h-12 sm:w-8 sm:h-8 text-[#F87E0D]" />
+        <div className=" flex    border border-gray-100  w-full sm:w-[48%] md:w-[48%] h-32  justify-center xxl:flex-1  rounded-xl gap-6 sm:gap-4 px-4  font-bold items-center bg-orange-500 text-white  mb-6 xxl:mb-0 ">
+          <div className="bg-orange-100 h-[80px] sm:h-[50px] w-[50px] flex items-center justify-center rounded-lg ">
+            <BanknotesIcon className=" w-12 h-12 sm:w-8 sm:h-8 text-orange-500" />
           </div>
           <div className="flex-[2]">
             <p className="text-3xl sm:text-2xl">&#8358; 200,000</p>
@@ -75,9 +63,9 @@ const Home = () => {
           </div>
         </div>
         {/* Stats 2 */}
-        <div className=" flex    border border-gray-100  w-full sm:w-[48%] md:w-[48%] h-40  justify-center xxl:flex-1  rounded-xl gap-4 px-4 xxl:gap-2 xxl:px-2  font-bold items-center bg-white text-black hover:text-white hover:bg-[#F87E0D] mb-6 xxl:mb-0">
-          <div className="bg-gray-200 h-[80px] sm:h-[60px] w-[80px] flex items-center justify-center rounded-lg sm:flex-1">
-            <BanknotesIcon className="w-12 h-12 sm:w-8 sm:h-8 text-[#F87E0D]" />
+        <div className="  flex    border border-gray-100  w-full sm:w-[48%] md:w-[48%] h-32  justify-center xxl:flex-1  rounded-xl gap-6 sm:gap-4 px-4  font-bold items-center bg-blue-500 text-white  mb-6 xxl:mb-0 ">
+          <div className="bg-blue-100 h-[60px] sm:h-[50px] w-[50px] flex items-center justify-center rounded-lg ">
+            <BanknotesIcon className="w-12 h-12 sm:w-8 sm:h-8 text-blue-500" />
           </div>
           <div className="flex-[2]">
             <p className=" text-3xl sm:text-2xl">&#8358; 200,000</p>
@@ -86,9 +74,9 @@ const Home = () => {
         </div>
 
         {/* Stats 2 */}
-        <div className=" flex  group  border border-gray-100  w-full sm:w-[48%] md:w-[48%] h-40  justify-center xxl:flex-1  rounded-xl  gap-4 px-4  font-bold items-center bg-white text-black hover:text-white hover:bg-[#F87E0D] mb-6 xxl:mb-0">
-          <div className="bg-[#fbbc856e] group-hover:bg-gray-200 h-[80px] sm:h-[60px] w-[80px] flex items-center justify-center rounded-lg sm:flex-1">
-            <CreditCardIcon className="w-12 h-12 sm:w-8 sm:h-8 text-[#F87E0D]" />
+        <div className=" flex    border border-gray-100  w-full sm:w-[48%] md:w-[48%] h-32  justify-center xxl:flex-1  rounded-xl  gap-4 px-4  font-bold items-center bg-green-500 text-white hover:text-white  mb-6 xxl:mb-0">
+          <div className="bg-green-100  h-[50px] w-[50px] flex items-center justify-center rounded-lg ">
+            <CreditCardIcon className="w-12 h-12 sm:w-8 sm:h-8 text-green-500" />
           </div>
           <div className="flex-[2]">
             <p className=" text-3xl sm:text-2xl">&#8358; 200,000</p>
@@ -97,9 +85,9 @@ const Home = () => {
         </div>
 
         {/* Stats 3 */}
-        <div className=" flex    border border-gray-100  w-full sm:w-[48%] md:w-[48%] h-40  justify-center xxl:flex-1  rounded-xl  gap-4 px-4  font-bold items-center bg-white text-black hover:text-white hover:bg-[#F87E0D] mb-6 xxl:mb-0">
-          <div className="bg-[#f3fb85] h-[60px] w-[50px] flex items-center justify-center rounded-lg sm:flex-1">
-            <BriefcaseIcon className="w-12 h-12 sm:w-8 sm:h-8 text-[#F87E0D]" />
+        <div className=" flex    border border-gray-100  w-full sm:w-[48%] md:w-[48%] h-32  justify-center xxl:flex-1  rounded-xl  gap-4 px-4  font-bold items-center bg-red-500 text-white hover:text-white  mb-6 xxl:mb-0">
+          <div className="bg-red-100 h-[50px] w-[50px] flex items-center justify-center rounded-lg ">
+            <BriefcaseIcon className="w-12 h-12 sm:w-8 sm:h-8 text-red-500" />
           </div>
           <div className="flex-[2]">
             <p className="text-3xl sm:text-2xl">&#8358; 200,000</p>
@@ -108,23 +96,23 @@ const Home = () => {
         </div>
 
         {/* Stats 4 */}
-        <div className=" flex    border border-gray-100  w-full sm:w-[48%] md:w-[48%] h-40  justify-center xxl:flex-1  rounded-xl  gap-4 px-4  font-bold items-center bg-white text-black hover:text-white hover:bg-[#F87E0D] mb-6 xxl:mb-0">
-          <div className="bg-[#a6f80d] h-[80px] sm:h-[60px] w-[80px] flex items-center justify-center rounded-lg sm:flex-1">
-            <ReceiptPercentIcon className="w-12 h-12 sm:w-8 sm:h-8 text-[#F87E0D]" />
+        <div className=" flex    border border-gray-100  w-full sm:w-[48%] md:w-[48%] h-32  justify-center xxl:flex-1  rounded-xl  gap-4 px-4  font-bold items-center bg-white text-black  mb-6 xxl:mb-0">
+          <div className="bg-green-100 h-[80px] sm:h-[50px] w-[50px] flex items-center justify-center rounded-lg ">
+            <ReceiptPercentIcon className="w-12 h-12 sm:w-8 sm:h-8 text-green-500" />
           </div>
-          <div className="flex-[2]">
+          <div className="flex-[2] text-green-500">
             <p className=" text-3xl sm:text-2xl">20%</p>
             <p className=" sm:text-sm">Recovery Rate</p>
           </div>
         </div>
       </section>
-      <section className="flex items-center flex-col xxl:flex-row mb-20  gap-8 px-12 md:px-4 w-full">
-        <div className="bg-white rounded-lg pt-4 h-[400px]  mb-10 xxl:mb-0">
-          <h1 className="ml-6 mb-2">Loan Issued</h1>
+      <section className="flex items-center flex-col xxl:flex-row mb-10    px-12 md:px-4 w-full bg-orange-50  justify-around py-10 pb-14">
+        <div className=" rounded-lg pt-4 h-[300px]  mb-10 xxl:mb-0">
+          <h1 className="ml-3 mb-2">Loan Issued</h1>
           <LoanIssuedChart />
         </div>
-        <div className="bg-white rounded-lg pt-4 h-[400px]">
-          <h1 className="ml-6 mb-10 ">Bnpl Summary</h1>
+        <div className=" rounded-lg pt-4 h-[300px]">
+          <h1 className="ml-3 mb-10 ">Bnpl Summary</h1>
           <BnplSummaryChart />
         </div>
       </section>

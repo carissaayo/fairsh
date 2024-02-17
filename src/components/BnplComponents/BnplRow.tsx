@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
 import { TableCell, TableRow } from "../ui/table";
-import { Bnpl } from "../../lib/types";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+import { Badge } from "../ui/badge";
+
+import GuarantorList from "./GuarantorList";
 import LoanDetails from "./LoanDetails";
 import CustomerDetails from "./CustomerDetails";
-import { ScrollArea, ScrollBar } from "../ui/scroll-area";
-import GuarantorList from "./GuarantorList";
 import ConfirmLoan from "./ConfirmLoan";
 import RejectLoan from "./RejectLoan";
+
+import { Bnpl } from "../../lib/types";
 
 const BnplRow = ({ bnpl, index }: { bnpl: Bnpl; index: number }) => {
   const [openBnpl, setOpenBnpl] = useState(false);
@@ -33,15 +37,28 @@ const BnplRow = ({ bnpl, index }: { bnpl: Bnpl; index: number }) => {
         </TableCell>
         <TableCell className="text-center"> {bnpl?.productId.name}</TableCell>
         <TableCell className="flex justify-center items-center">
-          {bnpl?.completed ? (
-            <div className=" text-green-600 text-center flex items-center w-[120px] h-[30px] font-bold">
-              <p className="">completed</p>
-            </div>
-          ) : (
-            <div className="text-red-800  text-center flex items-center justify-center w-[120px] h-[30px] font-bold">
-              <p className="">not completed</p>
-            </div>
-          )}
+          <div className="  text-center flex items-center justify-center w- font-bold bg">
+            <Badge
+              variant={
+                bnpl.loanStatus === "Rejected" ? "destructive" : "secondary"
+              }
+              className={`${
+                bnpl.loanStatus === "Completed" && "bg-green-600 text-white"
+              }
+              ${
+                bnpl.loanStatus === "Awaiting Approval" &&
+                "bg-yellow-600 text-white"
+              }
+               ${
+                 bnpl.loanStatus === "Awaiting Enrollment" &&
+                 "bg-green-600 text-white"
+               }
+              `}
+            >
+              {bnpl?.loanStatus}
+            </Badge>
+            <p className=""> </p>
+          </div>
         </TableCell>
         <TableCell className="text-center">
           {bnpl.createdAt && getDate(bnpl?.createdAt)}

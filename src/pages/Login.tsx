@@ -4,7 +4,7 @@ import { useLoginStore } from "../context/auth/loginStore";
 
 const Login = () => {
   const user = useLoginStore((state) => state.user);
-  if (user.accessToken) return <Navigate to="/" />;
+  if (user?.accessToken) return <Navigate to="/" />;
 
   return (
     <main className="w-full h-full pt-20 px-6 sm:px-20 md:px-48 lg:px-32 flex flex-col ">

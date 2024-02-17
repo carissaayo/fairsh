@@ -20,7 +20,12 @@ const PaginationCon = ({
   setPageCount,
 }: {
   itemsPerPage: number;
-  items: Bnpl[];
+  items:
+    | Bnpl[]
+    | Retailer[]
+    | RetailerCustomer[]
+    | RetailerGadget[]
+    | RetailerSale[];
   setItems: (items) => void;
   pageCount: number;
   setPageCount: (page: number) => void;

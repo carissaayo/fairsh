@@ -1,4 +1,5 @@
 import { useBnplStore } from "../../context/Bnpl/getBnpl";
+import Search from "../BnplComponents/Search";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import {
   Table,
@@ -14,7 +15,9 @@ const PaymentTable = () => {
   const bnpls = useBnplStore((state) => state.bnpls);
 
   return (
-    <section className="">
+    <section className="xxl:flex-[1.5]">
+      <Search />
+
       <ScrollArea className=" p-4">
         <Table className="  rounded-lg min-w-[800px] overflow-x-scroll">
           <TableHeader className="rounded-lg ">

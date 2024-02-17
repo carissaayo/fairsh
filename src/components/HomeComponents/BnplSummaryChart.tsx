@@ -7,7 +7,7 @@ import "@fontsource/roboto/700.css";
 const BnplSummaryChart = () => {
   return (
     <div className="">
-      <div className="hidden sm:block">
+      <div className="hidden sm:flex jusify-center">
         <PieChart
           series={[
             {

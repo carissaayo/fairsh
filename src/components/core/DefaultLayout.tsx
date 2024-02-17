@@ -5,6 +5,7 @@ import TopNav from "./TopNav";
 import SideNav from "./SideNav";
 import BottomNav from "./BottomNav";
 import { useLoginStore } from "../../context/auth/loginStore";
+import { useUserProfileStore } from "../../context/auth/getProfile";
 
 const DefaultLayout = () => {
   const user = useLoginStore((state) => state.user);
@@ -18,7 +19,7 @@ const DefaultLayout = () => {
     }
   };
 
-  if (!user.accessToken) {
+  if (!user?.accessToken) {
     return <Navigate to="login" />;
   }
 

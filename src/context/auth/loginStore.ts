@@ -3,17 +3,9 @@ import { LoggedInUserData } from "../../lib/types";
 
 const getUserFromLocalStorage = () =>
   JSON.parse(localStorage.getItem("data")) ?? [];
+
 type Data = {
-  user: {
-    accessToken: string;
-    profile: {
-      adminId: string;
-      email: string;
-      fullName: string;
-      isApproved: boolean;
-    };
-    refreshToken: string;
-  };
+  user: LoggedInUserData;
 
   success: boolean;
   loading: boolean;

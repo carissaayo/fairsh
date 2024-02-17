@@ -23,11 +23,6 @@ const Register = () => {
         <Link to="/forgot-password" className="text-[#0A05F8] mb-3">
           forgot password?
         </Link>
-        <div className="">
-          <Link to="/verify-email" className="text-[#0A05F8]">
-            verify email
-          </Link>
-        </div>
       </div>
     </main>
   );

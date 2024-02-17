@@ -1,4 +1,3 @@
-import axios from "axios";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -49,25 +48,26 @@ const VerifyEmailForm = () => {
 
         setLoading(false);
         setVerified(true);
-        toast.custom(
-          <div className="bg-white h-full sm:w-[450px] border p-4">
-            <p className="text-center mb-2">Your Email has been verified</p>
-            <p className="text-center mb-2">
-              Please go back and complete your registration
-            </p>
-            <div className="w-full flex items-center justify-center z-40">
-              <Button
-                className=""
-                onClick={() => {
-                  toast.remove();
-                  navigate("/register");
-                }}
-              >
-                Go Back
-              </Button>
-            </div>
-          </div>
-        );
+        // toast.custom(
+        //   <div className="bg-white h-full sm:w-[450px] border p-4">
+        //     <p className="text-center mb-2">
+        //       Your email has been verified successfully
+        //     </p>
+        //     <div className="w-full flex items-center justify-center z-40">
+        //       <Button
+        //         className=""
+        //         onClick={() => {
+        //           toast.remove();
+        //           navigate(-1);
+        //         }}
+        //       >
+        //         Go Back
+        //       </Button>
+        //     </div>
+        //   </div>
+        // );
+        // navigate("/account");
+        toast.success("Your email has been verified!");
       })
       .catch((error) => {
         console.log(error);

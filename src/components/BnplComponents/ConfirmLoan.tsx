@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColorRing } from "react-loader-spinner";
@@ -19,6 +19,7 @@ import axiosClient from "../../lib/axiosClient";
 import { useBnplStore } from "../../context/Bnpl/getBnpl";
 
 const ConfirmLoan = ({ id }: { id: string }) => {
+  const [openDialog, setOpenDialog] = useState(false);
   const queryClient = useQueryClient();
 
   const loading = useBnplStore((state) => state.actionLoading);
@@ -38,12 +39,14 @@ const ConfirmLoan = ({ id }: { id: string }) => {
         console.log(response);
         setDone(true);
         toast.success("The Bnpl has been approved!");
+        setOpenDialog(false);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
 
-        toast.error("something went wrong");
+        toast.error(error.response.data.message);
+        setOpenDialog(false);
       });
   }, [id]);
 
@@ -58,7 +61,10 @@ const ConfirmLoan = ({ id }: { id: string }) => {
   };
 
   return (
-    <AlertDialog>
+    <AlertDialog
+      open={openDialog}
+      onOpenChange={() => setOpenDialog(!openDialog)}
+    >
       <AlertDialogTrigger asChild>
         <Button className="bg-green-700 hover:bg-green-800 dark:text-white">
           Approve

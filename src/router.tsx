@@ -17,6 +17,10 @@ import GuestLayout from "./components/core/GuestLayout";
 import Bnpl from "./pages/Bnpl";
 import BnplPayment from "./pages/BnplPayment";
 import ManageAccount from "./pages/ManageAccount";
+import Retailers from "./pages/Retailers";
+import RetailerPage from "./pages/RetailerPage";
+import Gadgets from "./pages/Gadgets";
+import GadgetPage from "./pages/GadgetPage";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +43,22 @@ const router = createBrowserRouter([
       {
         path: "/account",
         element: <ManageAccount />,
+      },
+      {
+        path: "/retailers",
+        element: <Retailers />,
+      },
+      {
+        path: "/retailers/:id",
+        element: <RetailerPage />,
+      },
+      {
+        path: "/gadgets",
+        element: <Gadgets />,
+      },
+      {
+        path: "/gadgets/:id",
+        element: <GadgetPage />,
       },
 
       {

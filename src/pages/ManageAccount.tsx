@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { ColorRing } from "react-loader-spinner";
 
 import { useManageAccountStore } from "../context/account/getAccount";
@@ -10,12 +10,44 @@ import {
   TabsTrigger,
 } from "../components/ui/tabs";
 import ChangePasswordCon from "../components/ChangePasswordComponents/ChangePasswordCon";
-import ChangeEmailCon from "../components/ChangeEmailComponents/ChangeEmailCon";
 import { ScrollArea, ScrollBar } from "../components/ui/scroll-area";
+import ProfileCon from "../components/ProfileComponentsCon/ProfileCon";
+import VerifyEmailCon from "../components/VerifyEmailComponents/VerifyEmailCon";
+import { useUserProfileStore } from "../context/auth/getProfile";
+import axiosClient from "../lib/axiosClient";
+import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import { useVerifyEmailStore } from "../context/auth/verifyEmailStore";
 
 const ManageAccount = () => {
-  const loading = useManageAccountStore((state) => state.loading);
+  const loading = useUserProfileStore((state) => state.loading);
+  const setLoading = useUserProfileStore((state) => state.setLoading);
+  const setProfile = useUserProfileStore((state) => state.setProfile);
+  const profile = useUserProfileStore((state) => state.profile);
+  const verified = useVerifyEmailStore((state) => state.verified);
 
+  const fetchProfile = useCallback(async () => {
+    setLoading(true);
+    await axiosClient
+      .get(`/admin/auth/profile`)
+      .then((response) => {
+        console.log(response.data);
+        setProfile(response.data.data.profile);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+        toast.error("something went wrong");
+      });
+  }, [verified]);
+
+  const { mutate: fetchProfileFn } = useMutation({
+    mutationFn: () => fetchProfile(),
+  });
+  useEffect(() => {
+    fetchProfileFn();
+  }, [verified]);
   return (
     <main className="w-full h-full   overflow-x-hidden overflow-y-scroll mb-[400px] md:mb-40 bg-white ">
       {loading ? (
@@ -38,38 +70,47 @@ const ManageAccount = () => {
             </div>
             <section className="w-full flex justify-center">
               <Tabs
-                defaultValue="account"
+                defaultValue={
+                  profile.emailVerified ? "account" : "verify-email"
+                }
                 className=" w-[100%]   md:w-[90%] mx-auto"
               >
                 <ScrollArea className="w-full ">
                   <TabsList className=" min-w-[470px] overflow-x-scroll overflow-y-hidden xs:overflow-hidden w-full md:w-[90%] h-[50px] ">
+                    {!profile.emailVerified && (
+                      <TabsTrigger
+                        value="verify-email"
+                        className="flex-1 text-lg"
+                      >
+                        Verify Email
+                      </TabsTrigger>
+                    )}
                     <TabsTrigger value="account" className="flex-1 text-lg">
                       Profile
                     </TabsTrigger>
                     <TabsTrigger value="password" className="flex-1 text-lg">
                       Change Password
                     </TabsTrigger>
-                    <TabsTrigger value="email" className="flex-1 text-lg">
+                    {/* <TabsTrigger value="email" className="flex-1 text-lg">
                       Change Email
-                    </TabsTrigger>
-                    <TabsTrigger value="passwords" className="flex-1 text-lg">
-                      Password
-                    </TabsTrigger>
+                    </TabsTrigger> */}
                   </TabsList>
                   <ScrollBar orientation="horizontal" />
                 </ScrollArea>
+                {!profile.emailVerified && (
+                  <TabsContent value="verify-email">
+                    <VerifyEmailCon />
+                  </TabsContent>
+                )}
                 <TabsContent value="account">
-                  Make changes to your account here.
+                  <ProfileCon />
                 </TabsContent>
                 <TabsContent value="password">
                   <ChangePasswordCon />
                 </TabsContent>
-                <TabsContent value="email">
+                {/* <TabsContent value="email">
                   <ChangeEmailCon />
-                </TabsContent>
-                <TabsContent value="passwords">
-                  Change your password here.
-                </TabsContent>
+                </TabsContent> */}
               </Tabs>
             </section>
           </section>

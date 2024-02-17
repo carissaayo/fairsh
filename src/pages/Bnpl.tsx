@@ -10,7 +10,10 @@ import { useBnplStore } from "../context/Bnpl/getBnpl";
 import Navs from "../components/BnplComponents/Navs";
 import BnplTable from "../components/BnplComponents/BnplTable";
 import PaginationCon from "../components/Pagination";
-import Search from "../components/BnplComponents/Search";
+import SummaryTable from "../components/BnplComponents/SummaryTable";
+import { useUserProfileStore } from "../context/auth/getProfile";
+import { Navigate } from "react-router-dom";
+import { useLoginStore } from "../context/auth/loginStore";
 
 const Bnpl = () => {
   const queryClient = useQueryClient();
@@ -20,12 +23,14 @@ const Bnpl = () => {
   const setFilterBnplLoading = useBnplStore(
     (state) => state.setFilteredBnplLoading
   );
+  const filterBnplLoading = useBnplStore((state) => state.filteredBnplLoading);
   const setFiltered = useBnplStore((state) => state.setFiltered);
   const filtered = useBnplStore((state) => state.filtered);
 
   const setBnpls = useBnplStore((state) => state.setBnpls);
   const setPaginatedBnpls = useBnplStore((state) => state.setPaginatedBnpl);
   const bnpls = useBnplStore((state) => state.bnpls);
+  const setBnplsTotal = useBnplStore((state) => state.setBnplsTotal);
   const bnplsAnalytics = useBnplStore((state) => state.bnplsAnalytics);
   const setBnplsAnalytics = useBnplStore((state) => state.setBnplsAnalytics);
   const filterTerm = useBnplStore((state) => state.filterTerm);
@@ -33,6 +38,7 @@ const Bnpl = () => {
   const setRefetch = useBnplStore((state) => state.setRefetch);
   const pageCount = useBnplStore((state) => state.pageCount);
   const setPageCount = useBnplStore((state) => state.setPageCount);
+  const profile = useLoginStore((state) => state.user.profile);
 
   // Refetch
   const refetchBnpls = useCallback(async () => {
@@ -62,6 +68,7 @@ const Bnpl = () => {
         setBnpls(response.data?.data.bnpl);
         console.log(response.data?.data.bnpl);
 
+        setBnplsTotal(response.data?.data.bnpl.length);
         setLoading(false);
       })
       .catch((error) => {
@@ -83,6 +90,7 @@ const Bnpl = () => {
       .then((response) => {
         setRefetch(false);
         setBnpls(response.data?.data.bnpl);
+
         setFiltered(false);
         setFilterBnplLoading(false);
       })
@@ -99,6 +107,8 @@ const Bnpl = () => {
       .get(`/admin/bnpl-analytics`)
       .then((response) => {
         setBnplsAnalytics(response.data?.data.bnplAnalytics);
+        console.log(response.data?.data.bnplAnalytics);
+
         setLoading(false);
       })
       .catch((error) => {
@@ -125,18 +135,22 @@ const Bnpl = () => {
     mutationFn: () => fetchBnplsAnalytics(),
   });
   useEffect(() => {
-    bnpls.length === 0 && stateFn();
-  }, [bnpls]);
+    stateFn();
+  }, []);
 
-  useEffect(() => {
-    refetch && refetchFn();
-  }, [refetch]);
+  // useEffect(() => {
+  //   refetch && refetchFn();
+  // }, [refetch]);
   useEffect(() => {
     (bnplsAnalytics.length === 0 || refetch) && bnplsAnalyticsFn();
   }, [refetch]);
   useEffect(() => {
     filtered && fetchFilteredBnpls();
   }, [filterTerm, filtered]);
+
+  if (!profile.emailVerified) {
+    return <Navigate to="/account" />;
+  }
 
   return (
     <main className="w-full h-full   overflow-x-hidden overflow-y-scroll mb-52 xxl:mb-40 bg-white ">
@@ -156,20 +170,42 @@ const Bnpl = () => {
         <>
           <Navs />
           <section className="w-full mb-32 px-4 xs:px-8">
-            <Search />
-
-            {/* <MainCon /> */}
-            <BnplTable />
-            <section className="">
-              {" "}
-              <PaginationCon
-                itemsPerPage={10}
-                items={bnpls}
-                setItems={setPaginatedBnpls}
-                pageCount={pageCount}
-                setPageCount={setPageCount}
-              />
-            </section>
+            {filterBnplLoading ? (
+              <div className="w-full flex items-center justify-center flex-1 h-full ">
+                <ColorRing
+                  visible={true}
+                  height="80"
+                  width="80"
+                  ariaLabel="color-ring-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="color-ring-wrapper"
+                  colors={[
+                    "#e15b64",
+                    "#f47e60",
+                    "#f8b26a",
+                    "#abbd81",
+                    "#849b87",
+                  ]}
+                />
+              </div>
+            ) : (
+              <>
+                <section className="w-full flex gap-8 flex-col xxl:flex-row ">
+                  <SummaryTable />
+                  <BnplTable />
+                </section>
+                <section className="">
+                  {" "}
+                  <PaginationCon
+                    itemsPerPage={10}
+                    items={bnpls}
+                    setItems={setPaginatedBnpls}
+                    pageCount={pageCount}
+                    setPageCount={setPageCount}
+                  />
+                </section>
+              </>
+            )}
           </section>
           <ShowToaster />
         </>

@@ -1,15 +1,17 @@
-import { useState } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuRadioGroup,
-} from "../ui/dropdown-menu";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+import { useBnplStore } from "../../context/Bnpl/getBnpl";
 const Navs = () => {
-  const [active, setActive] = useState("Pending");
+  const setFilterTerm = useBnplStore((state) => state.setFilterTerm);
+  const setFiltered = useBnplStore((state) => state.setFiltered);
+  const bnplAnalytics = useBnplStore((state) => state.bnplsAnalytics);
+  const setActive = useBnplStore((state) => state.setActive);
+  const active = useBnplStore((state) => state.active);
+  const bnplsTotal = useBnplStore((state) => state.bnplsTotal);
 
+  const handleActive = (act: string) => {
+    setFilterTerm(act);
+    setFiltered(true);
+  };
   return (
     <main className=" h-[140px] sm:h-[135px]">
       <ScrollArea>
@@ -18,11 +20,33 @@ const Navs = () => {
           <div className="flex items-center gap-4">
             <div
               className={`p-4 cursor-pointer  ${
+                active === "All" && "border-b-2 border-[#F87E0D] font-bold "
+              }`}
+              onClick={() => {
+                setActive("All");
+                handleActive("All");
+              }}
+            >
+              <p className="sm:text-lg ">All ({bnplsTotal})</p>
+            </div>
+            <div
+              className={`p-4 cursor-pointer  ${
                 active === "Pending" && "border-b-2 border-[#F87E0D] font-bold "
               }`}
               onClick={() => setActive("Pending")}
             >
-              <p className="sm:text-lg ">Pending (20)</p>
+              <p className="sm:text-lg ">
+                Pending (
+                {bnplAnalytics
+                  .filter(
+                    (data) =>
+                      data._id === "Awaiting Aprroval" ||
+                      "Awaiting Enrollment" ||
+                      "Rejected"
+                  )
+                  .reduce((a, b) => a + b.count, 0)}
+                )
+              </p>
             </div>
             <div
               className={`p-4 cursor-pointer  ${
@@ -31,7 +55,12 @@ const Navs = () => {
               }`}
               onClick={() => setActive("Ongoing")}
             >
-              <p className="sm:text-lg ">Ongoing (20)</p>
+              <p className="sm:text-lg ">
+                Ongoing ({" "}
+                {bnplAnalytics.filter((data) => data._id === "Approved")[0]
+                  ?.count ?? 0}
+                )
+              </p>
             </div>
 
             <div
@@ -39,9 +68,17 @@ const Navs = () => {
                 active === "Completed" &&
                 "border-b-2 border-[#F87E0D] font-bold "
               }`}
-              onClick={() => setActive("Completed")}
+              onClick={() => {
+                handleActive("Completed");
+                setActive("Completed");
+              }}
             >
-              <p className="sm:text-lg ">Completed (20)</p>
+              <p className="sm:text-lg ">
+                Completed ({" "}
+                {bnplAnalytics.filter((data) => data._id === "Completed")[0]
+                  ?.count ?? 0}
+                )
+              </p>
             </div>
           </div>
         </section>
@@ -51,16 +88,50 @@ const Navs = () => {
               active === "Pending" ? "flex" : "hidden"
             }`}
           >
-            <p className="py-4  cursor-pointer"> Awaiting Approval (2)</p>
-            <p className="py-4 cursor-pointer"> Awaiting Enrollment (2)</p>
-            <p className="py-4 cursor-pointer"> Rejected (2)</p>
+            <p
+              className="py-4  cursor-pointer"
+              onClick={() => handleActive("Awaiting Approval")}
+            >
+              {" "}
+              Awaiting Approval (2)
+            </p>
+            <p
+              className="py-4 cursor-pointer"
+              onClick={() => handleActive("Awaiting Enrollment")}
+            >
+              {" "}
+              Awaiting Enrollment (
+              {bnplAnalytics.filter(
+                (data) => data._id === "Awaiting Enrollment"
+              )[0]?.count ?? 0}
+              )
+            </p>
+            <p
+              className="py-4 cursor-pointer"
+              onClick={() => handleActive("Rejected")}
+            >
+              {" "}
+              Rejected (
+              {bnplAnalytics.filter((data) => data._id === "Rejected")[0]
+                ?.count ?? 0}
+              )
+            </p>
           </div>
           <div
             className={` w-full gap-8  ${
               active === "Ongoing" ? "flex" : "hidden"
             }`}
           >
-            <p className="py-4  cursor-pointer"> All (2)</p>
+            <p
+              className="py-4  cursor-pointer"
+              onClick={() => handleActive("Approved")}
+            >
+              {" "}
+              All ({" "}
+              {bnplAnalytics.filter((data) => data._id === "Approved")[0]
+                ?.count ?? 0}
+              )
+            </p>
             <p className="py-4 cursor-pointer"> Payment Due (2)</p>
           </div>
         </section>

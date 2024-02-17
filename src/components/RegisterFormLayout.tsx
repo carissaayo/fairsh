@@ -83,7 +83,7 @@ const RegisterFormLayout = () => {
         localStorage.setItem("data", JSON.stringify(response.data?.data));
         setLoading(false);
         setSuccess(true);
-        navigate("/");
+        navigate("/login");
       })
       .catch((error) => {
         console.log(error);
@@ -166,8 +166,6 @@ const RegisterFormLayout = () => {
             <FormItem>
               <FormLabel>Confirm Password</FormLabel>
               <FormControl>
-                {/*  I twisted the Input so as to be able to use the show-password functionality */}
-                {/* added the 'PASS' prop so as to make it work */}
                 <Input placeholder="" {...field} type="password" />
               </FormControl>
 

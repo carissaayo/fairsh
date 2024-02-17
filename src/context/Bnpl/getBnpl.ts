@@ -18,6 +18,10 @@ type Data = {
   pageNumber: number;
   totalPageNumber: number;
   pageCount: number;
+  active: string;
+  bnplsTotal: number;
+  setBnplsTotal: (num: number) => void;
+  setActive: (active: string) => void;
   setPageCount: (page: number) => void;
   setTotalPageNumber: (num: number) => void;
   setPageNumber: (num: number) => void;
@@ -49,6 +53,10 @@ export const useBnplStore = create<Data>((set) => ({
   totalPageNumber: 1,
   pageNumber: 1,
   pageCount: 1,
+  active: "Pending",
+  bnplsTotal: 0,
+  setBnplsTotal: (num: number) => set(() => ({ bnplsTotal: num })),
+  setActive: (active: string) => set(() => ({ active })),
   setActionLoading: (ac: boolean) => set(() => ({ actionLoading: ac })),
   setPageCount: (pages: number) => set({ pageCount: pages }),
   setTotalPageNumber: (num: number) => set({ totalPageNumber: num }),

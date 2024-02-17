@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import axiosClient from "../../lib/axiosClient";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColorRing } from "react-loader-spinner";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,6 +19,7 @@ import { Input } from "../ui/input";
 import { useBnplStore } from "../../context/Bnpl/getBnpl";
 
 const RejectLoan = ({ id }: { id: string }) => {
+  const [openModal, setOpenModal] = useState(false);
   const queryClient = useQueryClient();
   const loading = useBnplStore((state) => state.actionLoading);
   const setLoading = useBnplStore((state) => state.setActionLoading);
@@ -42,13 +43,16 @@ const RejectLoan = ({ id }: { id: string }) => {
         setDone(true);
         toast.success("The Bnpl has been rejected");
         setRejectedReason("");
+        setOpenModal(false);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        if (error.response.status === 400)
+        if (error.response.status === 400) {
           return toast.error("Please provide a reason for this rejection");
-        toast.error("something went wrong");
+        }
+        toast.error(error.response.data.message);
+        setOpenModal(false);
       });
   }, [rejectReason, id]);
 
@@ -62,7 +66,7 @@ const RejectLoan = ({ id }: { id: string }) => {
     bnplRejectFn();
   };
   return (
-    <AlertDialog>
+    <AlertDialog open={openModal} onOpenChange={() => setOpenModal(!openModal)}>
       <AlertDialogTrigger asChild>
         <Button
           className="bg-red-700 hover:bg-red-800 dark:text-white"

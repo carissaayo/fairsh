@@ -9,7 +9,7 @@ type Data = {
 };
 export const useVerifyEmailStore = create<Data>((set) => ({
   verificationCode: "",
-  verified: true,
+  verified: false,
   loading: false,
   setLoading: (loading: boolean) => set(() => ({ loading })),
   setVerified: (verified) => set(() => ({ verified })),
