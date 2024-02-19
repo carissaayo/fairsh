@@ -62,10 +62,7 @@ const LoginFormLayout = () => {
       .then((response) => {
         console.log(response.data.data);
         setUser(response.data?.data);
-        localStorage.setItem(
-          "datta",
-          JSON.stringify(response.data?.data?.refreshtoken)
-        );
+        localStorage.setItem("data", JSON.stringify(response.data?.data));
         setLoading(false);
         setSuccess(true);
       })

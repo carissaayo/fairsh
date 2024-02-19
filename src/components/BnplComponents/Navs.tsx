@@ -12,6 +12,7 @@ const Navs = () => {
     setFilterTerm(act);
     setFiltered(true);
   };
+
   return (
     <main className=" h-[140px] sm:h-[135px]">
       <ScrollArea>
@@ -74,7 +75,7 @@ const Navs = () => {
               }}
             >
               <p className="sm:text-lg ">
-                Completed ({" "}
+                Completed (
                 {bnplAnalytics.filter((data) => data._id === "Completed")[0]
                   ?.count ?? 0}
                 )
@@ -93,7 +94,11 @@ const Navs = () => {
               onClick={() => handleActive("Awaiting Approval")}
             >
               {" "}
-              Awaiting Approval (2)
+              Awaiting Approval (
+              {bnplAnalytics.filter(
+                (data) => data._id === "Awaiting Approval"
+              )[0]?.count ?? 0}
+              )
             </p>
             <p
               className="py-4 cursor-pointer"

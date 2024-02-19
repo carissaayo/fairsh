@@ -107,7 +107,7 @@ const Bnpl = () => {
       .get(`/admin/bnpl-analytics`)
       .then((response) => {
         setBnplsAnalytics(response.data?.data.bnplAnalytics);
-        console.log(response.data?.data.bnplAnalytics);
+        console.log(response.data);
 
         setLoading(false);
       })
@@ -195,14 +195,15 @@ const Bnpl = () => {
                   <BnplTable />
                 </section>
                 <section className="">
-                  {" "}
-                  <PaginationCon
-                    itemsPerPage={10}
-                    items={bnpls}
-                    setItems={setPaginatedBnpls}
-                    pageCount={pageCount}
-                    setPageCount={setPageCount}
-                  />
+                  {bnpls.length > 0 && (
+                    <PaginationCon
+                      itemsPerPage={10}
+                      items={bnpls}
+                      setItems={setPaginatedBnpls}
+                      pageCount={pageCount}
+                      setPageCount={setPageCount}
+                    />
+                  )}
                 </section>
               </>
             )}

@@ -11,6 +11,9 @@ import BnplRow from "./BnplRow";
 import Search from "./Search";
 const BnplTable = () => {
   const bnpls = useBnplStore((state) => state.bnpls);
+  const paginatedBnpls = useBnplStore((state) => state.paginatedBnpls);
+  const loading = useBnplStore((state) => state.loading);
+  // console.log(paginatedBnpls);
 
   return (
     <section className="xxl:flex-[1.5]">
@@ -41,9 +44,11 @@ const BnplTable = () => {
               </TableRow>
             </TableHeader>
             <TableBody className=".bg">
-              {bnpls.map((bnpl, index) => (
-                <BnplRow key={bnpl._id} bnpl={bnpl} index={index} />
-              ))}
+              {!loading &&
+                bnpls.length > 0 &&
+                paginatedBnpls.map((bnpl, index) => (
+                  <BnplRow key={bnpl._id} bnpl={bnpl} index={index} />
+                ))}
             </TableBody>
           </Table>
         ) : (
