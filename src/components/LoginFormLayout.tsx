@@ -60,7 +60,7 @@ const LoginFormLayout = () => {
     await axiosClient
       .post(`/admin/auth/sign_in`, { ...values })
       .then((response) => {
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setUser(response.data?.data);
         localStorage.setItem("data", JSON.stringify(response.data?.data));
         setLoading(false);

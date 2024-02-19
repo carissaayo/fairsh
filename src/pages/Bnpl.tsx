@@ -75,7 +75,7 @@ const Bnpl = () => {
         console.log(error);
         setLoading(false);
 
-        toast.error("something went wrong");
+        toast.error(error.response.data.message);
       });
   }, []);
 
@@ -107,14 +107,14 @@ const Bnpl = () => {
       .get(`/admin/bnpl-analytics`)
       .then((response) => {
         setBnplsAnalytics(response.data?.data.bnplAnalytics);
-        console.log(response.data);
+        // console.log(response.data);
 
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        toast.error("something went wrong");
+        toast.error(error.response.data.message);
       });
   }, [refetch]);
 
@@ -135,14 +135,14 @@ const Bnpl = () => {
     mutationFn: () => fetchBnplsAnalytics(),
   });
   useEffect(() => {
-    stateFn();
-  }, []);
+    bnpls.length === 0 && stateFn();
+  }, [bnpls]);
 
   // useEffect(() => {
   //   refetch && refetchFn();
   // }, [refetch]);
   useEffect(() => {
-    (bnplsAnalytics.length === 0 || refetch) && bnplsAnalyticsFn();
+    refetch && bnplsAnalyticsFn();
   }, [refetch]);
   useEffect(() => {
     filtered && fetchFilteredBnpls();
