@@ -153,7 +153,7 @@ const Bnpl = () => {
   }
 
   return (
-    <main className="w-full h-full   overflow-x-hidden overflow-y-scroll mb-52 xxl:mb-40 bg-white ">
+    <main className="w-full h-screen  md:h-full   overflow-x-hidden overflow-y-scroll mb-52 xxl:mb-40 bg-white ">
       {loading ? (
         <div className="w-full flex items-center justify-center flex-1 h-full ">
           <ColorRing
