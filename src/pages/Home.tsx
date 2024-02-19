@@ -54,11 +54,11 @@ const Home = () => {
       <section className="flex  justify-between items-center   xl:gap-6 py-4 xxl:h-52  px-12 sm:px-8 xxl:px-4   border-gray-100 mx-auto xxl:mx-0 rounded-lg  flex-row flex-wrap xxl:flex-nowrap xl:w-[80%] xxl:w-full ">
         {/* Stats 1 */}
         <div className=" flex    border border-gray-100  w-full sm:w-[48%] md:w-[48%] h-32  justify-center xxl:flex-1  rounded-xl gap-6 sm:gap-4 px-4  font-bold items-center bg-orange-500 text-white  mb-6 xxl:mb-0 ">
-          <div className="bg-orange-100 h-[80px] sm:h-[50px] w-[50px] flex items-center justify-center rounded-lg ">
+          <div className="bg-orange-100 h-[50px] w-[50px] flex items-center justify-center rounded-lg ">
             <BanknotesIcon className=" w-12 h-12 sm:w-8 sm:h-8 text-orange-500" />
           </div>
           <div className="flex-[2]">
-            <p className="text-3xl sm:text-2xl">&#8358; 200,000</p>
+            <p className=" text-2xl">&#8358; 200,000</p>
             <p className=" sm:text-sm">Total loan issued</p>
           </div>
         </div>
@@ -68,7 +68,7 @@ const Home = () => {
             <BanknotesIcon className="w-12 h-12 sm:w-8 sm:h-8 text-blue-500" />
           </div>
           <div className="flex-[2]">
-            <p className=" text-3xl sm:text-2xl">&#8358; 200,000</p>
+            <p className="  text-2xl">&#8358; 200,000</p>
             <p className=" sm:text-sm">Remaining Balance</p>
           </div>
         </div>
@@ -79,7 +79,7 @@ const Home = () => {
             <CreditCardIcon className="w-12 h-12 sm:w-8 sm:h-8 text-green-500" />
           </div>
           <div className="flex-[2]">
-            <p className=" text-3xl sm:text-2xl">&#8358; 200,000</p>
+            <p className="  text-2xl">&#8358; 200,000</p>
             <p className=" sm:text-sm">Total Repaid</p>
           </div>
         </div>
@@ -90,18 +90,18 @@ const Home = () => {
             <BriefcaseIcon className="w-12 h-12 sm:w-8 sm:h-8 text-red-500" />
           </div>
           <div className="flex-[2]">
-            <p className="text-3xl sm:text-2xl">&#8358; 200,000</p>
+            <p className=" text-2xl">&#8358; 200,000</p>
             <p className=" sm:text-sm">Due Balance</p>
           </div>
         </div>
 
         {/* Stats 4 */}
         <div className=" flex    border border-gray-100  w-full sm:w-[48%] md:w-[48%] h-32  justify-center xxl:flex-1  rounded-xl  gap-4 px-4  font-bold items-center bg-white text-black  mb-6 xxl:mb-0">
-          <div className="bg-green-100 h-[80px] sm:h-[50px] w-[50px] flex items-center justify-center rounded-lg ">
+          <div className="bg-green-100 h-[50px] w-[50px] flex items-center justify-center rounded-lg ">
             <ReceiptPercentIcon className="w-12 h-12 sm:w-8 sm:h-8 text-green-500" />
           </div>
           <div className="flex-[2] text-green-500">
-            <p className=" text-3xl sm:text-2xl">20%</p>
+            <p className="  text-2xl">20%</p>
             <p className=" sm:text-sm">Recovery Rate</p>
           </div>
         </div>
