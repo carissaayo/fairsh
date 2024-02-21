@@ -42,16 +42,23 @@ const BnplRow = ({ bnpl, index }: { bnpl: Bnpl; index: number }) => {
               variant={
                 bnpl.loanStatus === "Rejected" ? "destructive" : "secondary"
               }
-              className={`${
-                bnpl.loanStatus === "Completed" && "bg-green-600 text-white"
+              className={`
+               
+              ${
+                bnpl.loanStatus === "Approved" &&
+                "bg-green-600 hover:bg-green-600 text-white"
+              }
+              ${
+                bnpl.loanStatus === "Completed" &&
+                "bg-blue-600 hover:bg-blue-600 text-white"
               }
               ${
                 bnpl.loanStatus === "Awaiting Approval" &&
-                "bg-yellow-600 text-white"
+                "bg-yellow-600 hover:bg-yellow-600 text-white"
               }
                ${
                  bnpl.loanStatus === "Awaiting Enrollment" &&
-                 "bg-green-600 text-white"
+                 "bg-orange-600 hover:bg-orange-600  text-white"
                }
               `}
             >
